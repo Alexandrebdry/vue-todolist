@@ -23,13 +23,28 @@ const handleSubmit = (e) => {
 
 <template>
 
-  <p>Ajouter des taches</p>
+  <p>Ajouter une nouvelle tâche</p>
   <form @submit.prevent="handleSubmit(task)">
     <input type="text" v-model="task.title" />
-    <input type="checkbox" v-model="task.done" />
     <button type="submit">Add</button>
   </form>
 
 
 </template>
+
+<style scoped>
+p {
+  margin: 0;
+  margin-top: 15px
+}
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 55px;
+}
+form > input {
+  width: 30vw;
+}
+</style>
 

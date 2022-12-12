@@ -33,14 +33,17 @@ let displayAll = ref({
 </script>
 
 <template>
-    <h1>{{props.title}}</h1>
-    <button @click="() => {displayAll.value = !displayAll.value}">{{displayAll.value? displayAll.textAll : displayAll.textDone}}</button>
-    <component :is="props.formAddTaskComponent" :onAdd="props.actions.add" />
+  <h1>{{props.title}}</h1>
+  <button @click="() => {displayAll.value = !displayAll.value}">{{displayAll.value? displayAll.textAll : displayAll.textDone}}</button>
+  <component :is="props.formAddTaskComponent" :onAdd="props.actions.add" />
 
-    <template v-for="item of props.items" :key="item.id">
-      <component :is="props.taskComponent" :item="item" :actions="{onDelete: props.actions.delete, onEdit: props.actions.edit}"
-                v-if="displayAll.value && !item.done || !displayAll.value" />
-    </template>
+  <template v-for="item of props.items" :key="item.id">
+    <component :is="props.taskComponent" :item="item" :actions="{onDelete: props.actions.delete, onEdit: props.actions.edit, onStateEdit: props.actions.onStateEdit}"
+               v-if="displayAll.value && !item.done || !displayAll.value" />
+  </template>
 
 </template>
 
+<style>
+
+</style>

@@ -16,20 +16,33 @@ const task = ref(props.item);
 </script>
 
 <template>
-  <div :style="{display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column'}">
+  <div :style="{display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', paddingBottom: '5px'}">
     <div :style="{display:'flex', alignItems:'center', justifyContent:'center'}">
-      <p>{{task.title}}</p>
-      <span>{{task.done ? '✅' : '❌' }}</span>
-    </div>
-    <button @click="props.actions.onEdit({...task, done: !task.done})">{{task.done ? 'set to todo' : 'set to done'}}</button>
-    <div>
-      <form @submit.prevent="props.actions.onEdit(task)">
+      <form @submit.prevent="props.actions.onEdit({...task, done: props.item.done})">
         <input type="text" v-model="task.title">
+        <span :class="'btn'" @click="props.actions.onEdit({...props.item, done: !props.item.done})">{{props.item.done ? '✅' : '❌' }}</span>
         <button type="submit">edit</button>
       </form>
+      <button @click="props.actions.onDelete(props.item)">Delete</button>
     </div>
-    <button @click="props.actions.onDelete(task)">Delete</button>
 
   </div>
 
 </template>
+
+<style scoped>
+.btn {
+    margin: 0 5px;
+    cursor: pointer;
+  }
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+form > input {
+  width: 24.5vw;
+}
+</style>
